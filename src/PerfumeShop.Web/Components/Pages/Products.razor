@@ -1,0 +1,50 @@
+@page "/products"
+@using PerfumeShop.Web.Models
+
+<PageTitle>Perfumes</PageTitle>
+
+<h1>Our Perfumes 🌸</h1>
+<p class="text-muted">Browse our collection of @products.Count fragrances.</p>
+
+<div class="row">
+    @foreach (var product in products)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title mb-0">@product.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@product.Brand</h6>
+                    <p class="card-text flex-grow-1">@product.Description</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fs-5 fw-bold">@product.Price.ToString("C")</span>
+                        <span class="text-muted">@product.SizeMl ml</span>
+                    </div>
+
+                    <div class="mt-2">
+                        @if (product.Stock > 0)
+                        {
+                            <span class="badge bg-success">In stock (@product.Stock)</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Out of stock</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Product> products = new()
+    {
+        new Product { Id = 1, Name = "No. 5",          Brand = "Chanel",             Description = "The timeless floral-aldehyde classic.", Price = 135.00m, SizeMl = 100, Stock = 8 },
+        new Product { Id = 2, Name = "Sauvage",        Brand = "Dior",               Description = "Fresh, raw and noble all at once.",     Price = 110.00m, SizeMl = 100, Stock = 15 },
+        new Product { Id = 3, Name = "Bleu de Chanel", Brand = "Chanel",             Description = "A woody aromatic for the bold.",        Price = 125.00m, SizeMl = 100, Stock = 5 },
+        new Product { Id = 4, Name = "Black Opium",    Brand = "Yves Saint Laurent", Description = "Addictive coffee and vanilla.",         Price = 98.00m,  SizeMl = 90,  Stock = 0 },
+        new Product { Id = 5, Name = "Aventus",        Brand = "Creed",              Description = "Bold, fruity and smoky signature.",     Price = 395.00m, SizeMl = 100, Stock = 3 },
+        new Product { Id = 6, Name = "Light Blue",     Brand = "Dolce & Gabbana",    Description = "Sun-drenched Mediterranean citrus.",    Price = 85.00m,  SizeMl = 100, Stock = 12 },
+    };
+}
